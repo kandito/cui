@@ -1,0 +1,340 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">var NREUMQ=NREUMQ||[];NREUMQ.push(["mark","firstbyte",new Date().getTime()]);</script>
+
+<title>CodeIgniter User Interface by Kandito</title>
+
+<style type='text/css' media='all'>@import url("/_user_guide_src_ci/userguide.css");</style>
+<link rel='stylesheet' type='text/css' media='all' href="userguide.css" />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>CodeIgniter User Interface by Kandito</h1></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>CUI Class</h1>
+
+<p>CUI class adalah sebuah library yang digunakan untuk melakukan mengelola view agar lebih teratur dan mengurangi pembuatan view yang berulang-ulang</p>
+
+<p>Fitur:</p>
+
+<ul>
+	<li>Merender view otomatis sesuai dengan class dan Function</li>
+	<li>Merender view secara parsial untuk beberapa section di halaman</li>
+	<li>Pemilihan layout dalam pemanggilan view</li>
+	<li>Header content yang dapat diubah dalam parameter di Controller</li>
+	<li>Pemanggilan file javascript dan CSS yang terstruktur</li>
+	<li>Mengubah view kedalam berkas Document (.doc) dan Excel (.xls)</li>
+</ul>
+
+<p>Parameter yang pada Function <dfn>render</dfn>: </p>
+<code>
+	$this->cui->render(<dfn>$data</dfn>, <dfn>'nama layout'</dfn>, <dfn>$header</dfn>, <dfn>'nama view'</dfn>)
+</code>
+
+<!-- VIEW DASAR -->
+<h2>Menampilkan View dasar</h2>
+
+<p>Fungsi ini digunakan untuk melakukan render view pada halaman.</p>
+<code>
+	$this->cui->render();
+</code>
+<p>View yang dipanggil adalah view yang berada dalam folder yang bernama sama dengan Controller, dan file yang bernama sama dengan Function.</p>
+<p>Contoh: Controller bernama <dfn>blog</dfn>, Function bernama <dfn>detail</dfn>, maka view yang dipanggil secara otomatis adalah <dfn>views/blog/detail.php</dfn></p>
+<!-- VIEW DASAR DENGAN VALUE -->
+<h2>Menampilkan View dengan <i>parsing</i> nilai</h2>
+
+<p>Fungsi ini digunakan untuk melakukan render view pada halaman dengan nilai.</p>
+Contoh pada Controller:
+<code>
+	$data['judul'] = "Posting Pertama";<br>
+	$data['isi'] = "Ini merupakan posting pertama"; <br>
+	$this->cui->render(<dfn>$data</dfn>);
+</code>
+
+Fungsi ini sama dengan penggunaan:
+<code>
+	$data['judul'] = "Posting Pertama";<br>
+	$data['isi'] = "Ini merupakan posting pertama"; <br>
+	$this->load->view(<dfn>'nama_Controller/nama_Function'</dfn>, <dfn>$data</dfn>);
+</code>
+
+<!-- VIEW DASAR DENGAN LAYOUT -->
+<h2>Menampilkan View dengan layout</h2>
+
+<p>Fungsi ini digunakan untuk melakukan render view pada halaman dengan layout yang telah ditentukan.</p>
+Contoh pada Controller:
+<code>
+	$data['judul'] = "Posting Pertama";<br>
+	$data['isi'] = "Ini merupakan posting pertama"; <br>
+	$this->cui->render(<dfn>$data</dfn>, <dfn>'1column'</dfn>);
+</code>
+<p>Untuk mengubah layout atau menambahkan layout, ada di folder views/layouts</p>
+<p>Secara default layout yang digunakan adalah 1column, namun anda dapat mengubah default layout pada variabel <var>$default_layout</var> di class cui.php<br>
+Penamaan layout sama dengan nama file namun tanpa ekstensi .php<br>
+Pilihan layout yang ada secara default ada:
+<ul>
+	<li>1 Kolom, <dfn>'1column'</dfn></li>
+	<li>2 Kolom, <dfn>'2column'</dfn></li>
+	<li>3 Kolom, <dfn>'3column'</dfn></li>
+</ul>
+</p>
+<p>Jika parameter diisi <var>null</var> maka layout default yang akan dipanggil.</p>
+<code>
+	$data['judul'] = "Posting Pertama";<br>
+	$data['isi'] = "Ini merupakan posting pertama"; <br>
+	$this->cui->render(<dfn>$data</dfn>, <dfn>null</dfn>);
+</code>
+
+<!-- VIEW DASAR DENGAN HEADER -->
+<h2>Menampilkan View dengan konten <i>header</i></h2>
+<p>Fungsi ini digunakan untuk render view dengan konten pada header yang dapat diatur dalam Controller. Jika ada konten header yang tidak didefinisikan namun diharuskan untuk ditampilkan, maka nilai default yang akan digunakan. Nilai default dapat diganti pada variabel-variabel default yang ada pada class <dfn>cui.php</dfn></p>
+<p>konten yang dapat diatur secara default antara lain:</p>
+<table cellpadding="0" cellspacing="1" border="0" style="width:60%" class="tableborder">
+<tr>
+	<th>Konten</th>
+	<th>Variabel dalam Array</th>
+	<th>Variabel default</th>
+</tr>
+<tr>
+	<td class="td">Title</td>
+	<td class="td"><dfn>'title'</dfn></td>
+	<td class="td">$default_title</td>
+</tr>
+<tr>
+	<td class="td">Author</td>
+	<td class="td"><dfn>'author'</dfn></td>
+	<td class="td">$default_author</td>
+</tr>
+<tr>
+	<td class="td">Keyword</td>
+	<td class="td"><dfn>'keyword'</dfn></td>
+	<td class="td">$default_keyword</td>
+</tr>
+<tr>
+	<td class="td">Description</td>
+	<td class="td"><dfn>'description'</dfn></td>
+	<td class="td">$default_description</td>
+</tr>
+
+
+</table>
+<p>Contoh dalam Controller:</p>
+<code>
+	$header['description'] = "Ini Title";<br>
+	$header['keywords'] = "cui, tag";<br>
+	$header['author'] = "Author";<br>
+	$header['title'] = "Ini Title";<br>
+	$this->cui->render(<var>null</var>, <var>'1column'</var>, <var>$header</var>);
+</code>
+
+<p>Isi pada file layout agar dapat menampilkan konten header:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="10">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="<?php echo $header_content['description']; ?>">
+   <meta name="keywords" content="<?php echo $header_content['keywords']; ?>">
+   <meta name="author" content="<?php echo $header_content['author']; ?>">
+   <title><?php echo $header_content['title']; ?></title>
+</head>
+</textarea>
+<p>Peletakan konten header dapat dilihat pada layout yang bersangkutan (dalam contoh adalah layout 1column, buka folder <dfn>views/layouts/1column.php</dfn> untuk melihat lebih detail). Anda dapat menambahkan konten header sendiri sesuai kebutuhan.</p>
+
+<!-- VIEW DASAR DENGAN LETAK VIEW YANG BERBEDA -->
+<h2>Menampilkan View yang berbeda dengan Controller dan Function</h2>
+<p>Fungsi ini digunakan untuk menampilkan view yang tidak letak folder dan nama file-nya tidak sama dengan nama Controller dan Function-nya, namun tetap ingin mem-parsing nilai dan konten header serta tetap menggunakan layout yang ada.</p>
+
+<p>Contoh pada Controller dengan nama <dfn>welcome</dfn> dan Function <dfn>index</dfn></p>
+<code>
+	$header['description'] = "Ini Title";<br>
+	$header['keywords'] = "cui, tag";<br>
+	$header['author'] = "Author";<br>
+	$header['title'] = "Ini Title";<br>
+	$this->cui->render(<var>null</var>, <var>'1column'</var>, <var>$header</var>, <var>welcome/viewdata</var>);
+</code>
+<p>Contoh tersebut akan menampilkan view yang berada pada <dfn>views/welcome/viewdata.php</dfn> dengan layout 1 kolom.</p>
+
+<!-- VIEW DASAR DENGAN HEADER -->
+<h2>Menampilkan View secara partial</h2>
+<p>Fungsi ini digunakan untuk menampilkan view secara partial atau tanpa layout dan dapat dipanggil dalam view juga.</p>
+<p>Contoh dalam file layout <dfn>1column.php</dfn>:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="13">
+<div class="container">
+	<?php $this->cui->partial('navigation'); ?>
+      	<?php $this->cui->partial('header'); ?>
+		
+	<div class="content">
+		<?php echo $content; ?>
+	</div>
+	  
+	<div id="footer">
+		<?php $this->cui->partial('footer'); ?>
+	</div>
+</div>
+</textarea>
+
+<p>Pada contoh diatas, dipanggil view <dfn>navigation</dfn> sehingga pada baris tersebut akan menampilkan view pada lokasi <dfn>views/partial/navigation.php</dfn>. <br>Fungsi ini berguna untuk membuat sebuah section pada suatu halaman yang harus dipanggil berkali-kali, sehingga anda cukup membuatnya satu kali dan dapat memanggilnya berkali-kali dengan fungsi ini.</p>
+
+<!-- MEMANGGIL JAVASCRIPT DAN CSS -->
+<h2>Memanggil JavaScript dan CSS</h2>
+<p>Struktur dasar</p>
+<code>
+	$this->cui->css(<var>'nama file CSS tanpa ekstensi'</var>);<br>
+	$this->cui->js(<var>'nama file JavaScript tanpa ekstensi'</var>);
+</code>
+<p>Untuk file CSS harus berada dalam folder <dfn>bootstrap/css</dfn></p>
+<p>Sedangkan file JavaScript harus berada dalam folder <dfn>bootstrap/js</dfn></p>
+
+</p>Contoh penggunaan pada View:</p>
+<textarea class="textarea" style="width:100%" cols="50" rows="3">
+<?php $this->cui->css('bootstrap'); ?>
+<?php $this->cui->js('bootstrap.min') ?>
+</textarea>
+<p>Pada contoh diatas maka CSS yang dipanggil berada dalam lokasi <dfn>bootstrap/css/bootstrap.css</dfn></p>
+<p>Sedangkan untuk JavaScript yang dipanggil berada dalam lokasi <dfn>bootstrap/js/bootstrap.min.js</dfn></p>
+
+<p>Anda juga dapat meletakan dalam sub-folder pada tiap folder tersebut, namun sertakan nama folder pada parameter, contoh
+<code>
+	$this->cui->css(<var>'home/style'</var>); 
+</code>
+untuk file yang berada dalam <var>bootstrap/css/home/style.css</var></p>
+
+<code>
+	$this->cui->js(<var>'home/script'</var>); 
+</code>
+untuk file yang berada dalam <var>bootstrap/js/home/script.js</var></p>
+
+
+<!-- MEMBUAT HALAMAN MENJADI DOCUMENT -->
+<h2>Membuat Halaman menjadi Document (.doc)</h2>
+<p>Struktur dasar</p>
+<code>
+	$this->cui->to_doc(<var>'nama view'</var>, <var>'data dalam array'</var>, <var>'nama file tanpa extensi'</var>);
+</code>
+<p>Contoh pada Controller</p>
+<textarea class="textarea" style="width:100%" cols="50" rows="4">
+$data['author'] = "Nama";<br>
+$data['report'] = "data report ...."<br>
+$this->cui->to_doc('output/report',$data,'report');
+</textarea>
+<p>View yang di panggil adalah <dfn>/views/output/report.php</dfn>
+<p>Contoh pada View: </p>
+<textarea class="textarea" style="width:100%" cols="50" rows="4">
+<h1><?php echo $author; ?></h1>
+<hr>
+<p><?php echo $author; ?></p>
+</textarea>
+<p>Maka setelah Controller di panggil, view tersebut akan dibuat menjadi berkas Document (.doc) dengan nama berkas </dfn>report.doc<dfn>
+
+<!-- MEMBUAT HALAMAN MENJADI EXCEL -->
+<h2>Membuat Halaman menjadi Excel (.xls)</h2>
+<p>Struktur dasar</p>
+<code>
+	$this->cui->to_xls(<var>'nama view'</var>, <var>'data dalam array'</var>, <var>'nama file tanpa extensi'</var>);
+</code>
+<p>Contoh pada Controller</p>
+<textarea class="textarea" style="width:100%" cols="50" rows="4">
+$data['author'] = "Nama";<br>
+$data['report'] = "data report ...."<br>
+$this->cui->to_xls('output/report',$data,'report');
+</textarea>
+<p>View yang di panggil adalah <dfn>/views/output/report.php</dfn>
+<p>Contoh pada View: </p>
+<textarea class="textarea" style="width:100%" cols="50" rows="18">
+<div class="bs-example">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Report</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><?php echo $author; ?></td>
+        <td><?php echo $report?></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</textarea>
+<p>Maka setelah Controller di panggil, view tersebut akan dibuat menjadi berkas Excel (.xls) dengan nama berkas </dfn>report.xls<dfn>
+
+
+<!-- MEMBUAT HALAMAN MENJADI EXCEL -->
+<h2>Membuat Halaman menjadi PDF</h2>
+<p>Struktur dasar</p>
+<code>
+	$this->cui->to_pdf(<var>'nama view'</var>, <var>'data dalam array'</var>, <var>'nama file tanpa extensi'</var>);
+</code>
+<p>Contoh pada Controller</p>
+<textarea class="textarea" style="width:100%" cols="50" rows="4">
+$data['author'] = "Nama";<br>
+$data['report'] = "data report ...."<br>
+$this->cui->to_pdf('output/report',$data,'report');
+</textarea>
+<p>View yang di panggil adalah <dfn>/views/output/report.php</dfn>
+<p>Contoh pada View: </p>
+<textarea class="textarea" style="width:100%" cols="50" rows="18">
+<div class="bs-example">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Report</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><?php echo $author; ?></td>
+        <td><?php echo $report?></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</textarea>
+<p>Maka setelah Controller di panggil, view tersebut akan dibuat menjadi berkas PDF dengan nama berkas </dfn>report.pdf<dfn>
+<p class="important"><strong>PERHATIAN:</strong> Fungsi ini menggunakan dompdf versi 0.5.2 sehingga belum mendukung pencetak PDF dari halaman yang memiliki style CSS. Jika view mangandung style CSS, silahkan update dompdf ke versi 0.6.0 beta. Cukup download di <a href="https://code.google.com/p/dompdf/downloads/list">halaman ini</a> lalu simpan folder 'dompdf' hasil extract di folder helpers (<i>replace</i> folder 'dompdf' yang sudah ada)</p>
+
+</div>
+<!-- END CONTENT -->
+
+<div id="footer">
+<p>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+</p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+</div>
+
+<script type="text/javascript">if(!NREUMQ.f){NREUMQ.f=Function(){NREUMQ.push(["load",new Date().getTime()]);var e=document.createElement("script");e.type="text/javascript";e.src=(("http:"===document.location.protocol)?"http:":"https:")+"//"+"js-agent.newrelic.com/nr-100.js";document.body.appendChild(e);if(NREUMQ.a)NREUMQ.a();};NREUMQ.a=window.onload;window.onload=NREUMQ.f;};NREUMQ.push(["nrfj","beacon-5.newrelic.com","eb488e72a1","2666983","NgEEZBYHDUFWVk0KWg9LJUUXEgxfGFZWB1AIAwhZEAMRHUJGXBEYBhEPVAFGThJyWVUKRi0FBA==",0,40,new Date().getTime(),"","","","",""]);</script></body>
+</html>
