@@ -1,0 +1,11 @@
+CUI class adalah sebuah library yang digunakan untuk melakukan mengelola view agar lebih teratur dan mengurangi pembuatan view yang berulang-ulang
+
+Fitur:
+-Merender view otomatis sesuai dengan class dan Function
+-Merender view secara parsial untuk beberapa section di halaman
+-Pemilihan layout dalam pemanggilan view
+-Header content yang dapat diubah dalam parameter di Controller
+-Pemanggilan file javascript dan CSS yang terstruktur
+-Mengubah view kedalam berkas Document (.doc) dan Excel (.xls)
+
+http://cui.kandito.com

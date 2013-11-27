@@ -77,12 +77,7 @@ Contoh pada Controller:
 	$this->cui->render(<dfn>$data</dfn>);
 </code>
 
-Fungsi ini sama dengan penggunaan:
-<code>
-	$data['judul'] = "Posting Pertama";<br>
-	$data['isi'] = "Ini merupakan posting pertama"; <br>
-	$this->load->view(<dfn>'nama_Controller/nama_Function'</dfn>, <dfn>$data</dfn>);
-</code>
+Fungsi ini sama dengan penggunaan akan menampilkan view yang berada dalam folder <dfn>views/__nama controller__/__nama function__</dfn> dengan menggunakan layout <i>default</i>.
 
 <!-- VIEW DASAR DENGAN LAYOUT -->
 <h2>Menampilkan View dengan layout</h2>
@@ -95,16 +90,16 @@ Contoh pada Controller:
 	$this->cui->render(<dfn>$data</dfn>, <dfn>'1column'</dfn>);
 </code>
 <p>Untuk mengubah layout atau menambahkan layout, ada di folder views/layouts</p>
-<p>Secara default layout yang digunakan adalah 1column, namun anda dapat mengubah default layout pada variabel <var>$default_layout</var> di class cui.php<br>
+<p>Secara <i>default</i> layout yang digunakan adalah 1column, namun anda dapat mengubah <i>default</i> layout pada variabel <var>$<i>default</i>_layout</var> di class cui.php<br>
 Penamaan layout sama dengan nama file namun tanpa ekstensi .php<br>
-Pilihan layout yang ada secara default ada:
+Pilihan layout yang ada secara dasar ada:
 <ul>
 	<li>1 Kolom, <dfn>'1column'</dfn></li>
 	<li>2 Kolom, <dfn>'2column'</dfn></li>
 	<li>3 Kolom, <dfn>'3column'</dfn></li>
 </ul>
 </p>
-<p>Jika parameter diisi <var>null</var> maka layout default yang akan dipanggil.</p>
+<p>Jika parameter diisi <var>null</var> maka layout <i>default</i> yang akan dipanggil.</p>
 <code>
 	$data['judul'] = "Posting Pertama";<br>
 	$data['isi'] = "Ini merupakan posting pertama"; <br>
@@ -113,33 +108,33 @@ Pilihan layout yang ada secara default ada:
 
 <!-- VIEW DASAR DENGAN HEADER -->
 <h2>Menampilkan View dengan konten <i>header</i></h2>
-<p>Fungsi ini digunakan untuk render view dengan konten pada header yang dapat diatur dalam Controller. Jika ada konten header yang tidak didefinisikan namun diharuskan untuk ditampilkan, maka nilai default yang akan digunakan. Nilai default dapat diganti pada variabel-variabel default yang ada pada class <dfn>cui.php</dfn></p>
-<p>konten yang dapat diatur secara default antara lain:</p>
+<p>Fungsi ini digunakan untuk render view dengan konten pada header yang dapat diatur dalam Controller. Jika ada konten header yang tidak didefinisikan namun diharuskan untuk ditampilkan, maka nilai <i>default</i> yang akan digunakan. Nilai <i>default</i> dapat diganti pada variabel-variabel <i>default</i> yang ada pada class <dfn>cui.php</dfn></p>
+<p>konten yang dapat diatur secara <i>default</i> antara lain:</p>
 <table cellpadding="0" cellspacing="1" border="0" style="width:60%" class="tableborder">
 <tr>
 	<th>Konten</th>
 	<th>Variabel dalam Array</th>
-	<th>Variabel default</th>
+	<th>Variabel <i>default</i></th>
 </tr>
 <tr>
 	<td class="td">Title</td>
 	<td class="td"><dfn>'title'</dfn></td>
-	<td class="td">$default_title</td>
+	<td class="td">$<i>default</i>_title</td>
 </tr>
 <tr>
 	<td class="td">Author</td>
 	<td class="td"><dfn>'author'</dfn></td>
-	<td class="td">$default_author</td>
+	<td class="td">$<i>default</i>_author</td>
 </tr>
 <tr>
 	<td class="td">Keyword</td>
 	<td class="td"><dfn>'keyword'</dfn></td>
-	<td class="td">$default_keyword</td>
+	<td class="td">$<i>default</i>_keyword</td>
 </tr>
 <tr>
 	<td class="td">Description</td>
 	<td class="td"><dfn>'description'</dfn></td>
-	<td class="td">$default_description</td>
+	<td class="td">$<i>default</i>_description</td>
 </tr>
 
 
